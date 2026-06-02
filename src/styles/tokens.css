@@ -1,0 +1,93 @@
+/* Readback Design Tokens */
+/* Inter is loaded via next/font/google in layout.tsx — no @import needed here */
+
+:root {
+  /* ── Colors: Neutrals ── */
+  --white: #ffffff;
+  --gray-50: #f7f8fa;
+  --gray-100: #edeef2;
+  --gray-200: #d9dbe3;
+  --gray-400: #9397a8;
+  --gray-600: #5b5f72;
+  --gray-900: #16181f;
+
+  /* ── Colors: Blue (accent only) ── */
+  --blue-50: #eef4ff;
+  --blue-100: #d8e8ff;
+  --blue-400: #4a7fe5;
+  --blue-500: #2f6ad9;
+  --blue-600: #1d56c4;
+
+  /* ── Colors: Semantic ── */
+  --green: #22c55e;
+  --green-bg: #f0fdf4;
+  --yellow: #eab308;
+  --yellow-bg: #fefce8;
+  --red: #ef4444;
+  --red-bg: #fef2f2;
+
+  /* ── Typography ── */
+  --font-family: var(--font-inter), 'Inter', sans-serif;
+
+  --font-weight-thin: 100;
+  --font-weight-extralight: 200;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  /* Role-based type scale */
+  --text-page-title-size: 24px;
+  --text-page-title-weight: 600;
+
+  --text-section-heading-size: 16px;
+  --text-section-heading-weight: 500;
+
+  --text-body-size: 14px;
+  --text-body-weight: 400;
+
+  --text-body-sm-size: 13px;
+  --text-body-sm-weight: 400;
+
+  --text-meta-size: 12px;
+  --text-meta-weight: 400;
+
+  --text-label-size: 11px;
+  --text-label-weight: 500;
+
+  --text-stat-size: 26px;
+  --text-stat-weight: 600;
+
+  /* ── Layout ── */
+  --nav-width: 220px;
+  --nav-bg: var(--gray-50);
+  --workspace-bg: var(--white);
+
+  /* ── Spacing ── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* ── Border Radius ── */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-full: 9999px;
+
+  /* ── Borders ── */
+  --border-default: 1px solid var(--gray-100);
+  --border-subtle: 1px solid var(--gray-200);
+
+  /* ── Shadows ── */
+  --shadow-sm: 0 1px 2px 0 rgb(22 24 31 / 0.04);
+  --shadow-md: 0 2px 8px 0 rgb(22 24 31 / 0.08);
+  --shadow-lg: 0 4px 16px 0 rgb(22 24 31 / 0.10);
+}
