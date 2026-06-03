@@ -46,8 +46,10 @@ export async function POST(req: NextRequest) {
     }
 
     if (ext === ".pdf") {
-      const pdfParse = (await import("pdf-parse")).default;
-      const result = await pdfParse(buffer);
+      const { PDFParse } = await import("pdf-parse");
+      const parser = new PDFParse({ data: buffer });
+      const result = await parser.getText();
+      await parser.destroy();
       return NextResponse.json({ text: result.text });
     }
 

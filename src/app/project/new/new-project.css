@@ -42,6 +42,28 @@
   min-width: 0;
 }
 
+.new-project__form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.new-project__form-fields:disabled {
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.new-project__optional {
+  font-weight: var(--font-weight-regular);
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--gray-400);
+}
+
 .new-project__field {
   display: flex;
   flex-direction: column;

@@ -1,40 +1,35 @@
 import { NextRequest, NextResponse } from "next/server";
 import { synthesize } from "@/lib/claude";
-import { fetchFigmaStructure } from "@/lib/figma";
-import { createServerClient } from "@/lib/supabase";
 import type { AnalysisType } from "@/types";
 
 export async function POST(req: NextRequest) {
   try {
-    const { transcript, figmaUrl, analysisType, projectId } =
-      (await req.json()) as {
-        transcript: string;
-        figmaUrl: string;
-        analysisType: AnalysisType;
-        projectId?: string;
-      };
-
-    if (!transcript || !figmaUrl || !analysisType) {
+    if (!process.env.ANTHROPIC_API_KEY) {
       return NextResponse.json(
-        { error: "transcript, figmaUrl, and analysisType are required" },
+        { error: "ANTHROPIC_API_KEY is not configured" },
+        { status: 500 }
+      );
+    }
+
+    const { transcript, analysisType } = (await req.json()) as {
+      transcript: string;
+      analysisType: AnalysisType;
+    };
+
+    if (!transcript?.trim() || !analysisType) {
+      return NextResponse.json(
+        { error: "transcript and analysisType are required" },
         { status: 400 }
       );
     }
 
-    const figmaStructure = await fetchFigmaStructure(figmaUrl);
-    const synthesis = await synthesize(transcript, figmaStructure, analysisType);
-
-    if (projectId) {
-      const db = createServerClient();
-      await db
-        .from("projects")
-        .update({ synthesis })
-        .eq("id", projectId);
-    }
+    const synthesis = await synthesize(transcript.trim(), analysisType);
 
     return NextResponse.json({ synthesis });
   } catch (err) {
     console.error("[synthesize]", err);
-    return NextResponse.json({ error: "Synthesis failed" }, { status: 500 });
+    const message =
+      err instanceof Error ? err.message : "Synthesis failed";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
