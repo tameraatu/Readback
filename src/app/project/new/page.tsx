@@ -1,8 +1,11 @@
+import { AppShell } from "@/components/AppShell";
+import { NewProjectForm } from "./NewProjectForm";
+import "./new-project.css";
+
 export default function NewProjectPage() {
   return (
-    <main>
-      <h1>New Project</h1>
-      {/* TranscriptUploader + FigmaConnector + analysis type toggle */}
-    </main>
+    <AppShell>
+      <NewProjectForm />
+    </AppShell>
   );
 }

@@ -1,13 +1,19 @@
 "use client";
 
 type Props = {
-  onUrl: (url: string) => void;
+  value: string;
+  onChange: (url: string) => void;
 };
 
-export function FigmaConnector({ onUrl }: Props) {
+export function FigmaConnector({ value, onChange }: Props) {
   return (
-    <div>
-      {/* Figma URL input + validate button */}
-    </div>
+    <input
+      type="url"
+      className="new-project__input"
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      placeholder="https://www.figma.com/design/…"
+      autoComplete="off"
+    />
   );
 }
