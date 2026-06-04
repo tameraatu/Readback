@@ -6,9 +6,18 @@
   padding: var(--space-8) var(--space-10);
 }
 
-.new-project__header {
-  margin-bottom: var(--space-8);
+.new-project__back {
+  display: inline-block;
+  margin-bottom: var(--space-3);
+  font-size: var(--text-body-sm-size);
+  color: var(--gray-600);
+  text-decoration: none;
 }
+
+.new-project__back:hover {
+  color: var(--blue-500);
+}
+
 
 .new-project__title {
   margin: 0 0 var(--space-2);

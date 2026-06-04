@@ -45,9 +45,9 @@ export type SynthesisOutput = {
 
 export type Project = {
   id: string;
-  user_id: string;
+  user_id: string | null;
   name: string;
-  figma_url: string;
+  figma_url: string | null;
   transcript: string;
   synthesis: SynthesisOutput | null;
   created_at: string;

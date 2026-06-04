@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { synthesize } from "@/lib/claude";
+import { isSupabaseConfigured, saveProject } from "@/lib/projects";
 import type { AnalysisType } from "@/types";
 
 export async function POST(req: NextRequest) {
@@ -11,21 +12,37 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { transcript, analysisType } = (await req.json()) as {
+    if (!isSupabaseConfigured()) {
+      return NextResponse.json(
+        { error: "Supabase is not configured" },
+        { status: 500 }
+      );
+    }
+
+    const { name, transcript, figmaUrl, analysisType } = (await req.json()) as {
+      name: string;
       transcript: string;
+      figmaUrl?: string;
       analysisType: AnalysisType;
     };
 
-    if (!transcript?.trim() || !analysisType) {
+    if (!name?.trim() || !transcript?.trim() || !analysisType) {
       return NextResponse.json(
-        { error: "transcript and analysisType are required" },
+        { error: "name, transcript, and analysisType are required" },
         { status: 400 }
       );
     }
 
     const synthesis = await synthesize(transcript.trim(), analysisType);
 
-    return NextResponse.json({ synthesis });
+    const project = await saveProject({
+      name: name.trim(),
+      transcript: transcript.trim(),
+      figmaUrl,
+      synthesis,
+    });
+
+    return NextResponse.json({ synthesis, project });
   } catch (err) {
     console.error("[synthesize]", err);
     const message =

@@ -51,13 +51,16 @@ export function NewProjectForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          name: name.trim(),
           transcript: transcript.trim(),
+          figmaUrl: figmaUrl.trim() || undefined,
           analysisType,
         }),
       });
 
       const data = (await res.json()) as {
         synthesis?: SynthesisOutput;
+        project?: { id: string };
         error?: string;
       };
 
