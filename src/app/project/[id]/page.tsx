@@ -1,10 +1,8 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { AppShell } from "@/components/AppShell";
-import { SynthesisResults } from "@/components/SynthesisResults";
+import { ProjectDetailShell } from "@/components/ProjectDetailShell";
+import { ProjectView } from "@/components/ProjectView";
 import { getProjectById, isSupabaseConfigured } from "@/lib/projects";
-import "@/components/synthesis.css";
-import "../new/new-project.css";
+import "@/components/project-detail.css";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -15,13 +13,13 @@ export default async function ProjectPage({ params }: Props) {
 
   if (!isSupabaseConfigured()) {
     return (
-      <AppShell>
-        <div className="new-project">
-          <p className="new-project__submit-error">
+      <ProjectDetailShell projectName="Project">
+        <div className="project-detail">
+          <p className="project-detail__empty">
             Supabase is not configured.
           </p>
         </div>
-      </AppShell>
+      </ProjectDetailShell>
     );
   }
 
@@ -32,24 +30,8 @@ export default async function ProjectPage({ params }: Props) {
   }
 
   return (
-    <AppShell>
-      <div className="new-project">
-        <header className="new-project__header">
-          <Link href="/" className="new-project__back">
-            ← All projects
-          </Link>
-          <h1 className="new-project__title">{project.name}</h1>
-        </header>
-
-        {project.synthesis ? (
-          <SynthesisResults
-            projectName={project.name}
-            synthesis={project.synthesis}
-          />
-        ) : (
-          <p className="new-project__hint">No analysis results for this project.</p>
-        )}
-      </div>
-    </AppShell>
+    <ProjectDetailShell projectName={project.name}>
+      <ProjectView project={project} />
+    </ProjectDetailShell>
   );
 }

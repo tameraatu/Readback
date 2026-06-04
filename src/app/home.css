@@ -107,15 +107,27 @@
   display: block;
   padding: var(--space-5);
   text-decoration: none;
+  cursor: pointer;
   background: var(--white);
   border: var(--border-default);
   border-radius: var(--radius-lg);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease,
+    background 0.15s ease;
 }
 
 .home-project-card:hover {
   border-color: var(--gray-200);
   box-shadow: var(--shadow-sm);
+  background: var(--gray-50);
+}
+
+.home-project-card:focus-visible {
+  outline: 2px solid var(--blue-500);
+  outline-offset: 2px;
+}
+
+.home-project-card:active {
+  box-shadow: none;
 }
 
 .home-project-card__header {

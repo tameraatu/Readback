@@ -26,7 +26,11 @@ export function ProjectList({ projects }: Props) {
 
         return (
           <li key={project.id}>
-            <Link href={`/project/${project.id}`} className="home-project-card">
+            <Link
+              href={`/project/${project.id}`}
+              className="home-project-card"
+              aria-label={`Open project: ${project.name}`}
+            >
               <div className="home-project-card__header">
                 <h2 className="home-project-card__name">{project.name}</h2>
                 <time
